@@ -1,0 +1,125 @@
+﻿<Window x:Class="ExtraCostCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Project Cost Calculator" Height="800" Width="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Project Base Cost -->
+                <RowDefinition Height="Auto"/>
+                <!-- Exceptions -->
+                <RowDefinition Height="Auto"/>
+                <!-- Deadline Multiplier -->
+                <RowDefinition Height="Auto"/>
+                <!-- SOW -->
+                <RowDefinition Height="Auto"/>
+                <!-- Revisions -->
+                <RowDefinition Height="Auto"/>
+                <!-- Team Lead -->
+                <RowDefinition Height="Auto"/>
+                <!-- PM -->
+                <RowDefinition Height="Auto"/>
+                <!-- Discounts -->
+                <RowDefinition Height="Auto"/>
+                <!-- Fixed Extras -->
+                <RowDefinition Height="Auto"/>
+                <!-- Variable Extras -->
+                <RowDefinition Height="Auto"/>
+                <!-- Payment Term Risks -->
+                <RowDefinition Height="Auto"/>
+                <!-- Additional space for layout adjustment -->
+                <RowDefinition Height="Auto"/>
+                <!-- Calculate Button -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Project Base Cost -->
+            <Label Grid.Row="0" Grid.Column="0" Content="Project Base Cost:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Enter base cost"/>
+
+            <!-- Exceptions Section with CheckBoxes -->
+            <Label Grid.Row="1" Grid.Column="0" Content="Exceptions:" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="5,5,5,5">
+                <CheckBox Content="Test Work"/>
+                <CheckBox Content="Referrals" Margin="0,5,0,0"/>
+                <CheckBox Content="Junior Performers" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <!-- Deadline Multiplier -->
+            <Label Grid.Row="2" Grid.Column="0" Content="Deadline Multiplier:" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" Margin="5">
+                <ComboBoxItem Content="Flexible"/>
+                <ComboBoxItem Content="x2"/>
+                <ComboBoxItem Content="x3"/>
+            </ComboBox>
+
+            <!-- SOW -->
+            <Label Grid.Row="3" Grid.Column="0" Content="SOW:" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" Margin="5">
+                <ComboBoxItem Content="Ok"/>
+                <ComboBoxItem Content="Perfect"/>
+                <ComboBoxItem Content="Not as per example"/>
+            </ComboBox>
+
+            <!-- Revisions -->
+            <Label Grid.Row="4" Grid.Column="0" Content="Revisions:" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                <RadioButton Content="3 rounds" GroupName="Revisions"/>
+                <RadioButton Content="More" GroupName="Revisions" Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <!-- Team Lead with Text Fields -->
+            <Label Grid.Row="5" Grid.Column="0" Content="Team Lead:" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                <RadioButton Content="TL Consulting" GroupName="TeamLead"/>
+                <TextBox Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Hours"/>
+                <TextBox Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Rate"/>
+                <RadioButton Content="TL" GroupName="TeamLead" Margin="20,0,0,0"/>
+                <TextBox Width="60" Margin="5,0" materialDesign:HintAssist.Hint="Percentage"/>
+            </StackPanel>
+
+            <!-- PM with Text Fields -->
+            <Label Grid.Row="6" Grid.Column="0" Content="PM:" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                <TextBox Width="100" Margin="5,0" materialDesign:HintAssist.Hint="PM Hours"/>
+                <TextBox Width="100" Margin="5,0" materialDesign:HintAssist.Hint="PM Rate"/>
+            </StackPanel>
+
+            <!-- Discounts with Radio Buttons -->
+            <Label Grid.Row="7" Grid.Column="0" Content="Discounts:" VerticalAlignment="Center"/>
+            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                <RadioButton Content="12%" GroupName="Discounts"/>
+                <RadioButton Content="24%" GroupName="Discounts" Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <!-- Fixed Extras -->
+            <Label Grid.Row="8" Grid.Column="0" Content="Fixed Extras:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="8" Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Fixed amount"/>
+
+            <!-- Variable Extras -->
+            <Label Grid.Row="9" Grid.Column="0" Content="Variable Extras:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="9" Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="% of project"/>
+
+            <!-- Payment Term Risks -->
+            <Label Grid.Row="10" Grid.Column="0" Content="Payment Term Risks:" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="10" Grid.Column="1" Margin="5">
+                <ComboBoxItem Content="NET30"/>
+                <ComboBoxItem Content="NET60"/>
+                <ComboBoxItem Content="None"/>
+            </ComboBox>
+
+            <!-- Calculate Button -->
+            <Button Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Content="Розрахувати суму"
+                    HorizontalAlignment="Right" Margin="0,20,0,20"
+                    Click="CalculateSum_Click"/>
+        </Grid>
+    </ScrollViewer>
+</Window>
