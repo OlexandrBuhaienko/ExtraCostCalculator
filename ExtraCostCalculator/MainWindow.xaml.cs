@@ -71,7 +71,7 @@ namespace ExtraCostCalculator
             additionalCost += CalculateDeadlineMultiplier(baseCost);
             additionalCost += CalculateSOWAdjustment(baseCost);
             additionalCost += CalculateRevisionsCost(baseCost);
-            //additionalCost += CalculateTeamLeadCost(baseCost);
+            additionalCost += CalculateTeamLeadCost(baseCost);
             //additionalCost += CalculatePMCost(baseCost);
             //additionalCost += CalculateFixedExtras();
             //additionalCost += CalculateVariableExtras(baseCost);
@@ -148,7 +148,37 @@ namespace ExtraCostCalculator
             return revisionsAdditionalCost;
         }
 
-
+        private decimal CalculateTeamLeadCost(decimal baseCost)
+        {
+            if(TLConsultingRadioButton.IsChecked == true) 
+            {
+                decimal TLHours, TLRate;
+                if (decimal.TryParse(TLHoursTextBox.Text, out TLHours) 
+                    && decimal.TryParse(TLRateTextBox.Text, out TLRate)
+                    && TLHours != 0 && TLRate != 0)
+                {
+                    return TLHours * TLRate;
+                }
+                else
+                {
+                    MessageBox.Show("This is a number only field and it cannot be zero!");
+                    return 0;
+                }
+            }
+            else if (TLRadioButton.IsChecked == true)
+            {
+                if (decimal.TryParse(TLPercentage.Text, out decimal percentage))
+                {
+                    return baseCost * (percentage / 100m); // використовуйте m для вказівки на decimal літерал
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid percentage.");
+                    return 0;
+                }
+            }
+            return 0;
+        }
         //Method to apply discount to the initial cost 
         private decimal ApplyDiscount(decimal cost)
         {

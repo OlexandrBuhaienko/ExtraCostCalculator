@@ -76,11 +76,11 @@
             <!-- Team Lead with Text Fields -->
             <Label Grid.Row="5" Grid.Column="0" Content="Team Lead:" VerticalAlignment="Center"/>
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                <RadioButton Content="TL Consulting" GroupName="TeamLead"/>
-                <TextBox Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Hours"/>
-                <TextBox Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Rate"/>
-                <RadioButton Content="TL" GroupName="TeamLead" Margin="20,0,0,0"/>
-                <TextBox Width="60" Margin="5,0" materialDesign:HintAssist.Hint="Percentage"/>
+                <RadioButton x:Name="TLConsultingRadioButton" Content="TL Consulting" GroupName="TeamLeadOption"/>
+                <TextBox x:Name="TLHoursTextBox" Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Hours"/>
+                <TextBox  x:Name="TLRateTextBox" Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Rate"/>
+                <RadioButton x:Name="TLRadioButton" Content="TL" GroupName="TeamLeadOption" Margin="20,0,0,0"/>
+                <TextBox x:Name="TLPercentage" Width="60" Margin="5,0" materialDesign:HintAssist.Hint="Percentage"/>
             </StackPanel>
 
             <!-- PM with Text Fields -->
