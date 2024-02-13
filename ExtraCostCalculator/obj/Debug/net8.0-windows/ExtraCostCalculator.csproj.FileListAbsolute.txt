@@ -18,6 +18,7 @@ D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows
 D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\ExtraCostCalculator.AssemblyInfoInputs.cache
 D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\ExtraCostCalculator.AssemblyInfo.cs
 D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\ExtraCostCalculator.csproj.CoreCompileInputs.cache
+D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\ExtraCostCalculator.sourcelink.json
 D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\ExtraCostCalculator.csproj.CopyComplete
 D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\ExtraCostCalculator.dll
 D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\obj\Debug\net8.0-windows\refint\ExtraCostCalculator.dll
