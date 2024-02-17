@@ -86,8 +86,8 @@
             <!-- PM with Text Fields -->
             <Label Grid.Row="6" Grid.Column="0" Content="PM:" VerticalAlignment="Center"/>
             <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                <TextBox Width="100" Margin="5,0" materialDesign:HintAssist.Hint="PM Hours"/>
-                <TextBox Width="100" Margin="5,0" materialDesign:HintAssist.Hint="PM Rate"/>
+                <TextBox x:Name="PMHoursTextBox" Width="100" Margin="5,0" materialDesign:HintAssist.Hint="PM Hours"/>
+                <TextBox x:Name="PMRateTextBox" Width="100" Margin="5,0" materialDesign:HintAssist.Hint="PM Rate"/>
             </StackPanel>
 
             <!-- Discounts with Radio Buttons -->

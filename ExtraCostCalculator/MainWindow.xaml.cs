@@ -72,7 +72,7 @@ namespace ExtraCostCalculator
             additionalCost += CalculateSOWAdjustment(baseCost);
             additionalCost += CalculateRevisionsCost(baseCost);
             additionalCost += CalculateTeamLeadCost(baseCost);
-            //additionalCost += CalculatePMCost(baseCost);
+            additionalCost += CalculatePMCost();
             //additionalCost += CalculateFixedExtras();
             //additionalCost += CalculateVariableExtras(baseCost);
             //additionalCost += CalculatePaymentTermRisk(baseCost);
@@ -178,6 +178,18 @@ namespace ExtraCostCalculator
                 }
             }
             return 0;
+        }
+        private decimal CalculatePMCost()
+        {
+            if (decimal.TryParse(PMHoursTextBox.Text, out decimal pmHours) && decimal.TryParse(PMRateTextBox.Text, out decimal pmRate))
+            {
+                return pmHours * pmRate;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid value.");
+                return 0;
+            }
         }
         //Method to apply discount to the initial cost 
         private decimal ApplyDiscount(decimal cost)
