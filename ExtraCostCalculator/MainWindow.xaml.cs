@@ -73,7 +73,7 @@ namespace ExtraCostCalculator
             additionalCost += CalculateRevisionsCost(baseCost);
             additionalCost += CalculateTeamLeadCost(baseCost);
             additionalCost += CalculatePMCost();
-            //additionalCost += CalculateFixedExtras();
+            additionalCost += CalculateFixedExtras();
             //additionalCost += CalculateVariableExtras(baseCost);
             //additionalCost += CalculatePaymentTermRisk(baseCost);
 
@@ -113,7 +113,7 @@ namespace ExtraCostCalculator
         private decimal CalculateSOWAdjustment(decimal baseCost)
         {
             decimal sowAdditionalCost;
-            switch (SOWComboBox.Text) 
+            switch (SOWComboBox.Text)
             {
                 case "Ok":
                     {
@@ -141,7 +141,7 @@ namespace ExtraCostCalculator
         private decimal CalculateRevisionsCost(decimal baseCost)
         {
             decimal revisionsAdditionalCost = 0;
-            if(MoreRevisionsRadioButton.IsChecked == true)
+            if (MoreRevisionsRadioButton.IsChecked == true)
             {
                 revisionsAdditionalCost = baseCost * 0.1m;
             }
@@ -150,10 +150,10 @@ namespace ExtraCostCalculator
 
         private decimal CalculateTeamLeadCost(decimal baseCost)
         {
-            if(TLConsultingRadioButton.IsChecked == true) 
+            if (TLConsultingRadioButton.IsChecked == true)
             {
                 decimal TLHours, TLRate;
-                if (decimal.TryParse(TLHoursTextBox.Text, out TLHours) 
+                if (decimal.TryParse(TLHoursTextBox.Text, out TLHours)
                     && decimal.TryParse(TLRateTextBox.Text, out TLRate)
                     && TLHours != 0 && TLRate != 0)
                 {
@@ -185,19 +185,63 @@ namespace ExtraCostCalculator
             {
                 return pmHours * pmRate;
             }
-            else
-            {
-                MessageBox.Show("Please enter a valid value.");
-                return 0;
-            }
+            return 0;
+            //else
+            //{
+            //    MessageBox.Show("Please enter a valid value.");
+            //    return 0;
+            //}
         }
         //Method to apply discount to the initial cost 
+        private decimal CalculateFixedExtras()
+        {
+            if(decimal.TryParse(FixedExtrasTextBox.Text, out decimal fixedExtraCost))
+            {
+                return fixedExtraCost;
+            }
+            return 0;
+        }
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+            //var radioButton = sender as RadioButton;
+            try
+            {
+                if (radioButton != null)
+                {
+                    bool isButtonChecked;
+                    // Спробуємо безпечно перетворити Tag на boolean
+                    bool.TryParse(radioButton.Tag.ToString(), out isButtonChecked);
+
+                    if (radioButton.IsChecked == true && isButtonChecked)
+                    {
+                        radioButton.IsChecked = false;
+                        radioButton.Tag = false;
+                    }
+                    else
+                    {
+                        radioButton.Tag = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private decimal ApplyDiscount(decimal cost)
         {
             decimal discountRate = 0;
-            if (Discounts12RadioButton.IsChecked == true) discountRate = 0.12m;
-            else if (Discounts24RadioButton.IsChecked == true) discountRate = 0.24m;
+            if (Discounts12RadioButton.IsChecked == true)
+            {
+                discountRate = 0.12m;
+            }
 
+            else if (Discounts24RadioButton.IsChecked == true)
+            {
+                discountRate = 0.24m;
+            }
             return cost - (cost * discountRate);
         }
     }

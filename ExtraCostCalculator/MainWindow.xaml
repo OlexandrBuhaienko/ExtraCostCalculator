@@ -69,17 +69,21 @@
             <!-- Revisions -->
             <Label Grid.Row="4" Grid.Column="0" Content="Revisions:" VerticalAlignment="Center"/>
             <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                <RadioButton Content="3 rounds" GroupName="Revisions"/>
-                <RadioButton x:Name="MoreRevisionsRadioButton" Content="More" GroupName="Revisions" Margin="20,0,0,0"/>
+                <RadioButton x:Name="RegularRevisionsRadioButton" Content="3 rounds" GroupName="Revisions" 
+                             Tag="False" Click="RadioButton_Click"/>
+                <RadioButton x:Name="MoreRevisionsRadioButton" Content="More" GroupName="Revisions" Margin="20,0,0,0"
+                             Tag="False" Click="RadioButton_Click"/>
             </StackPanel>
 
             <!-- Team Lead with Text Fields -->
             <Label Grid.Row="5" Grid.Column="0" Content="Team Lead:" VerticalAlignment="Center"/>
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                <RadioButton x:Name="TLConsultingRadioButton" Content="TL Consulting" GroupName="TeamLeadOption"/>
+                <RadioButton x:Name="TLConsultingRadioButton" Content="TL Consulting" GroupName="TeamLeadOption" 
+                             Tag="False" Click="RadioButton_Click"/>
                 <TextBox x:Name="TLHoursTextBox" Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Hours"/>
                 <TextBox  x:Name="TLRateTextBox" Width="60" Margin="5,0" materialDesign:HintAssist.Hint="TL Rate"/>
-                <RadioButton x:Name="TLRadioButton" Content="TL" GroupName="TeamLeadOption" Margin="20,0,0,0"/>
+                <RadioButton x:Name="TLRadioButton" Content="TL" GroupName="TeamLeadOption" Margin="20,0,0,0" 
+                             Tag="False" Click="RadioButton_Click"/>
                 <TextBox x:Name="TLPercentage" Width="60" Margin="5,0" materialDesign:HintAssist.Hint="Percentage"/>
             </StackPanel>
 
@@ -94,9 +98,11 @@
             <Label Grid.Row="7" Grid.Column="0" Content="Discounts:" VerticalAlignment="Center"/>
             <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" Margin="5">
                 <RadioButton x:Name="Discounts12RadioButton" Content="12%" GroupName="Discounts" 
-                             Grid.Row="7" Grid.Column="1" Margin="5,5,0,5" Checked="DiscountsRadioButton_Checked"/>
+                             Grid.Row="7" Grid.Column="1" Margin="5,5,0,5" Checked="DiscountsRadioButton_Checked" 
+                             Tag="False" Click="RadioButton_Click"/>
                 <RadioButton x:Name="Discounts24RadioButton" Content="24%" GroupName="Discounts" 
-                             Grid.Row="7" Grid.Column="1" Margin="5,5,0,5" Checked="DiscountsRadioButton_Checked"/>
+                             Grid.Row="7" Grid.Column="1" Margin="5,5,0,5" Checked="DiscountsRadioButton_Checked" 
+                             Tag="False" Click="RadioButton_Click"/>
             </StackPanel>
 
             <!-- Fixed Extras -->
