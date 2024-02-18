@@ -53,7 +53,7 @@ namespace ExtraCostCalculator
             }
 
             decimal finalCost = CalculateFinalCost(baseCost);
-            MessageBox.Show($"Final project cost: {finalCost:C}", "Calculation Result");
+            ResultLabel.Content = $"Result: {finalCost}";
         }
 
         //Calculate final cost method which is calling the Calculate additional cost method 

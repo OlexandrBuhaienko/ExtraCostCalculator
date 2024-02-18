@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExtraCostCalculator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d56fceeddc7901fe47f6aa0ff0417fc99d5ed80")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8da3af352a1dfd1d7265bbce0de38bb5a6a50b3b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExtraCostCalculator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExtraCostCalculator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

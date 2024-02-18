@@ -6,8 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Project Cost Calculator" Height="506" Width="823"
-        Icon="D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\Resources\favicon.jpg"
-        BorderBrush="Black">
+        Icon="D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\Resources\favicon.jpg">
 
 
 
@@ -122,8 +121,6 @@
                 <Button Content="Add" Click="AddTextBox_Click" Width="52" Height="20" Margin="3" HorizontalAlignment="Left" FontSize="10"/>
             </StackPanel>
 
-
-
             <!-- Payment Term Risks -->
             <Label Grid.Row="10" Grid.Column="0" Content="Payment Term Risks:" VerticalAlignment="Center"/>
             <ComboBox x:Name="NetComboBox" Grid.Row="10" Grid.Column="1" Margin="5" SelectionChanged="NetComboBox_SelectionChanged">
@@ -131,10 +128,13 @@
                 <ComboBoxItem Content="NET60"/>
                 <ComboBoxItem Content="None"/>
             </ComboBox>
-
             <!-- Calculate Button -->
-            <Button x:Name="CalculateButton" Content="Розрахувати суму" Grid.Row="12" Grid.Column="0" 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" 
+                        Grid.Row="12" Grid.Column="12">
+                <Label x:Name="ResultLabel" Content="Result:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Margin="0,0,10,0"/>
+                <Button x:Name="CalculateButton" Content="Calculate result" 
                     Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,20,0,20" Click="CalculateButton_Click"/>
+            </StackPanel>
         </Grid>
     </ScrollViewer>
 </Window>
