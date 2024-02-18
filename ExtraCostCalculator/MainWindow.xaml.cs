@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -39,7 +40,6 @@ namespace ExtraCostCalculator
             CalculateButton.IsEnabled = isBaseCostValid;
         }
 
-
         //OnClick event handler for Calculate button which is calling the calculate final cost method
         private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,10 +60,8 @@ namespace ExtraCostCalculator
             finalCost += CalculateAdditionalCosts(baseCost);
             //finalCost -= CalculateReferralsDiscount();
             finalCost = ApplyDiscount(finalCost);
-
             return finalCost;
         }
-
         //CalculateAdditionalCost method, which is calling other methods to calculate every part of additional cost 
         private decimal CalculateAdditionalCosts(decimal baseCost)
         {
@@ -74,13 +72,10 @@ namespace ExtraCostCalculator
             additionalCost += CalculateTeamLeadCost(baseCost);
             additionalCost += CalculatePMCost();
             additionalCost += CalculateFixedExtras();
-            //additionalCost += CalculateVariableExtras(baseCost);
+            additionalCost += CalculateVariableExtras(baseCost);
             //additionalCost += CalculatePaymentTermRisk(baseCost);
-
             return additionalCost;
         }
-
-        // Імплементуйте методи CalculateDeadlineMultiplier, CalculateSOWAdjustment, CalculateRevisionsCost, CalculateTeamLeadCost, CalculatePMCost, CalculateFixedExtras, CalculateVariableExtras, CalculatePaymentTermRisk згідно з вказаними умовами.
 
         private decimal CalculateDeadlineMultiplier(decimal baseCost)
         {
@@ -195,11 +190,25 @@ namespace ExtraCostCalculator
         //Method to apply discount to the initial cost 
         private decimal CalculateFixedExtras()
         {
-            if(decimal.TryParse(FixedExtrasTextBox.Text, out decimal fixedExtraCost))
+            if (decimal.TryParse(FixedExtrasTextBox.Text, out decimal fixedExtraCost) && fixedExtraCost > 0)
             {
                 return fixedExtraCost;
             }
             return 0;
+        }
+        private decimal ApplyDiscount(decimal cost)
+        {
+            decimal discountRate = 0;
+            if (Discounts12RadioButton.IsChecked == true)
+            {
+                discountRate = 0.12m;
+            }
+
+            else if (Discounts24RadioButton.IsChecked == true)
+            {
+                discountRate = 0.24m;
+            }
+            return cost - (cost * discountRate);
         }
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -230,19 +239,51 @@ namespace ExtraCostCalculator
                 MessageBox.Show(ex.Message);
             }
         }
-        private decimal ApplyDiscount(decimal cost)
+        private void AddTextBox_Click(object sender, RoutedEventArgs e)
         {
-            decimal discountRate = 0;
-            if (Discounts12RadioButton.IsChecked == true)
+
+            TextBox newTextBox = new TextBox
             {
-                discountRate = 0.12m;
+                // Такий самий розмір, як і початкове текстове поле
+                Margin = new Thickness(5),
+                VerticalAlignment = VerticalAlignment.Top,
+            };
+
+            // Встановлення Hint за допомогою MaterialDesign
+            MaterialDesignThemes.Wpf.HintAssist.SetHint(newTextBox, "% of project");
+            // Створення нового текстового поля
+            // Додавання текстового поля до StackPanel
+            int buttonIndex = VariableExtrasStackPanel.Children.IndexOf(sender as UIElement);
+            VariableExtrasStackPanel.Children.Insert(buttonIndex, newTextBox);
+        }
+        private decimal CalculateVariableExtras(decimal baseCost)
+        {
+            decimal variablExtrasAdditionalCost = 0;
+            // Ініціалізація списку для зберігання тексту з текстових полів
+            List<string> textBoxValues = new List<string>();
+
+            foreach (UIElement element in VariableExtrasStackPanel.Children)
+            {
+                // Перевірка, чи є елемент текстовим полем
+                if (element is TextBox)
+                {
+                    // Додавання тексту з текстового поля до списку
+                    textBoxValues.Add(((TextBox)element).Text);
+                }
             }
 
-            else if (Discounts24RadioButton.IsChecked == true)
+            foreach (var textValue in textBoxValues)
             {
-                discountRate = 0.24m;
+                if (decimal.TryParse(textValue, out decimal variableExtraCost) && variableExtraCost > 0)
+                {
+                    variablExtrasAdditionalCost += (baseCost * (variableExtraCost / 100));
+                    continue;
+                }
+                variablExtrasAdditionalCost += 0;
             }
-            return cost - (cost * discountRate);
+            return variablExtrasAdditionalCost;
         }
-    }
+        //private decimal CalculatePaymentTermRisk(decimal )
+    }    
 }
+
