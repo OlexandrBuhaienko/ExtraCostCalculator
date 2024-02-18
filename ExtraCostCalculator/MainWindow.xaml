@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Project Cost Calculator" Height="800" Width="800"
-        Icon="http://surl.li/qqmdj"
+        Title="Project Cost Calculator" Height="506" Width="823"
+        Icon="D:\WORK\ARCHICK\ExtraCostCalculator\ExtraCostCalculator\Resources\favicon.jpg"
         BorderBrush="Black">
-        
+
+
+
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="20">
@@ -117,14 +119,14 @@
             <!-- Variable Extras -->
             <StackPanel x:Name="VariableExtrasStackPanel"  Grid.Row="9" Grid.Column="1" Orientation="Vertical">
                 <TextBox x:Name="VariableExtraTextBox" Margin="5" materialDesign:HintAssist.Hint="% of project"/>
-                <Button Content="+" Click="AddTextBox_Click" Width="20" Height="20" Margin="3" HorizontalAlignment="Left"/>
+                <Button Content="Add" Click="AddTextBox_Click" Width="52" Height="20" Margin="3" HorizontalAlignment="Left" FontSize="10"/>
             </StackPanel>
 
 
 
             <!-- Payment Term Risks -->
             <Label Grid.Row="10" Grid.Column="0" Content="Payment Term Risks:" VerticalAlignment="Center"/>
-            <ComboBox Grid.Row="10" Grid.Column="1" Margin="5">
+            <ComboBox x:Name="NetComboBox" Grid.Row="10" Grid.Column="1" Margin="5" SelectionChanged="NetComboBox_SelectionChanged">
                 <ComboBoxItem Content="NET30"/>
                 <ComboBoxItem Content="NET60"/>
                 <ComboBoxItem Content="None"/>

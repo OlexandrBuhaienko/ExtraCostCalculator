@@ -29,11 +29,14 @@ namespace ExtraCostCalculator
             UpdateCalculateButtonState();
         }
 
+        private void NetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateCalculateButtonState();
+        }
         private void DiscountsRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             UpdateCalculateButtonState();
         }
-
         private void UpdateCalculateButtonState()
         {
             bool isBaseCostValid = decimal.TryParse(BaseCostTextBox.Text, out decimal baseCost) && baseCost > 0;
@@ -73,7 +76,7 @@ namespace ExtraCostCalculator
             additionalCost += CalculatePMCost();
             additionalCost += CalculateFixedExtras();
             additionalCost += CalculateVariableExtras(baseCost);
-            //additionalCost += CalculatePaymentTermRisk(baseCost);
+            additionalCost += CalculatePaymentTermRisk(baseCost);
             return additionalCost;
         }
 
@@ -210,6 +213,56 @@ namespace ExtraCostCalculator
             }
             return cost - (cost * discountRate);
         }
+        private decimal CalculateVariableExtras(decimal baseCost)
+        {
+            decimal variablExtrasAdditionalCost = 0;
+            // Ініціалізація списку для зберігання тексту з текстових полів
+            List<string> textBoxValues = new List<string>();
+
+            foreach (UIElement element in VariableExtrasStackPanel.Children)
+            {
+                // Перевірка, чи є елемент текстовим полем
+                if (element is TextBox)
+                {
+                    // Додавання тексту з текстового поля до списку
+                    textBoxValues.Add(((TextBox)element).Text);
+                }
+            }
+
+            foreach (var textValue in textBoxValues)
+            {
+                if (decimal.TryParse(textValue, out decimal variableExtraCost) && variableExtraCost > 0)
+                {
+                    variablExtrasAdditionalCost += (baseCost * (variableExtraCost / 100));
+                    continue;
+                }
+                variablExtrasAdditionalCost += 0;
+            }
+            return variablExtrasAdditionalCost;
+        }
+        private decimal CalculatePaymentTermRisk(decimal baseCost)
+        {
+            var selectedItem = NetComboBox.SelectedItem as ComboBoxItem;
+
+            if (selectedItem != null)
+            {
+                string? content = selectedItem.Content.ToString();
+
+                // Використання switch для визначення логіки обчислення
+                switch (content)
+                {
+                    case "NET30":
+                        return baseCost * 0.03m;
+                    case "NET60":
+                        return baseCost * 0.06m;
+                    case "None":
+                        return 0;
+                }
+            }
+            return 0;
+        }
+
+        //Additional methods, which helps user experience
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
             var radioButton = sender as RadioButton;
@@ -256,34 +309,6 @@ namespace ExtraCostCalculator
             int buttonIndex = VariableExtrasStackPanel.Children.IndexOf(sender as UIElement);
             VariableExtrasStackPanel.Children.Insert(buttonIndex, newTextBox);
         }
-        private decimal CalculateVariableExtras(decimal baseCost)
-        {
-            decimal variablExtrasAdditionalCost = 0;
-            // Ініціалізація списку для зберігання тексту з текстових полів
-            List<string> textBoxValues = new List<string>();
-
-            foreach (UIElement element in VariableExtrasStackPanel.Children)
-            {
-                // Перевірка, чи є елемент текстовим полем
-                if (element is TextBox)
-                {
-                    // Додавання тексту з текстового поля до списку
-                    textBoxValues.Add(((TextBox)element).Text);
-                }
-            }
-
-            foreach (var textValue in textBoxValues)
-            {
-                if (decimal.TryParse(textValue, out decimal variableExtraCost) && variableExtraCost > 0)
-                {
-                    variablExtrasAdditionalCost += (baseCost * (variableExtraCost / 100));
-                    continue;
-                }
-                variablExtrasAdditionalCost += 0;
-            }
-            return variablExtrasAdditionalCost;
-        }
-        //private decimal CalculatePaymentTermRisk(decimal )
-    }    
+    }
 }
 
